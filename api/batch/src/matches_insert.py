@@ -36,4 +36,4 @@ def get_all_matches():
 if __name__ == '__main__':
     insert_macthes()
     print("試合情報をFirestoreに格納しました。")
-    get_all_matches()
+    # get_all_matches()

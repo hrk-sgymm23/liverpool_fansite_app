@@ -36,4 +36,4 @@ def get_all_players():
 if __name__ == '__main__':
     insert_players()
     print("選手情報をFirestoreに格納しました。")
-    get_all_players()
+    # get_all_players()
