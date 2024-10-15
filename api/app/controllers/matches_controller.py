@@ -16,16 +16,15 @@ def get_matches():
 
     return jsonify(matches), 200
 
-# wip
 def get_recent_match_result():
     matches = prepare_matches()
-    print(matches)
+
+    played_matches = [match for match in matches if match['score']['winner']]
 
     current_date = datetime.now()
-
     recent_match = min(
-        matches,
-        key=lambda match: abs(datetime.strptime(match['date'], "%Y-%m-%d") - current_date) 
+        played_matches,
+        key=lambda match: abs(datetime.strptime(match['date'].split('T')[0], "%Y-%m-%d") - current_date) 
     )
 
     return jsonify(recent_match), 200
