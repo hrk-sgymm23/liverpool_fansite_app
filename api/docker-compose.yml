@@ -14,7 +14,8 @@ services:
       - ./docker/firebase/bin/:/root/.cache:cached
       - ./docker/firebase/config/:/root/.config:cached
       - ./extensions:/opt/firebase/extensions
-      - ./data:/opt/firebase/data 
+      - ./data:/opt/firebase/data
+      - ./export_data:/opt/firebase/data
     ports:
       # - 9099:9099 # Firebase Authentication
       - 8181:8181 # Cloud Firestore
