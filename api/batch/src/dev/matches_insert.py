@@ -8,6 +8,7 @@ import os
 import json
 
 emulator_host = os.getenv('FIRESTORE_EMULATOR_HOST')
+
 if emulator_host:
     print(f"Connecting to Firestore emulator at {emulator_host}")
     project = os.getenv('GCLOUD_PROJECT')
@@ -19,7 +20,7 @@ else:
     db = google.cloud.firestore.Client(database=dbname)
 
 def insert_macthes():
-    json_open = open('origin_data/files/v4_teams_64_matches.json', 'r')
+    json_open = open('../../origin_data/files/v4_teams_64_matches.json', 'r')
     json_load = json.load(json_open)
     matches = json_load['matches']
 
