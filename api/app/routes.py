@@ -17,6 +17,13 @@ def register_routes(app):
         players_controller.get_player,
         methods=['GET']
     )
+    app.add_url_rule(
+        f"{API_V1_PATH}/player",
+        'create_player', 
+        players_controller.create_player,
+        methods=['POST']
+    )
+
 
     # match
     app.add_url_rule(
@@ -26,7 +33,7 @@ def register_routes(app):
         methods=['GET']
     )
     app.add_url_rule(
-        f"{API_V1_PATH}/recent_result",
+        f"{API_V1_PATH}/recent_match",
         'get_recent_match_result',
         matches_controller.get_recent_match_result,
         methods=['GET']

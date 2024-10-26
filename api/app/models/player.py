@@ -1,3 +1,4 @@
+import logging
 from services.firestore_service import db
 
 class Player:
@@ -48,4 +49,25 @@ class Player:
         player_ref = player_refs[0].to_dict()
 
         return player_ref
-        
+    
+    @classmethod
+    def regisatration_player(cls, player_dict):
+        player_ref = db.collection(cls.COLLECTION_NAME).document()
+        player_ref.set({
+            'id': player_dict['id'],
+            'name': player_dict['name'],
+            'dateOfBirth': player_dict['dateOfBirth'],
+            'nationality': player_dict['nationality'],
+            'position': player_dict['position']
+        })
+
+        created_doc = player_ref.get()
+
+        if created_doc.exists:
+            player_data = created_doc.to_dict()
+            player_name = player_data['name']
+            logging.info(f'Document created {player_name}')
+        else:
+            logging.warning(f'Document with ID {player_ref.id} was not found.')
+
+        return player_data

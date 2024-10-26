@@ -11,7 +11,6 @@ def get_players():
 
 def get_player():
     name = request.args.get('name')
-    print(f"name:{name}")
 
     if name is None:
         return jsonify({"error": "name is required"}), 400
@@ -20,3 +19,8 @@ def get_player():
 
     return jsonify(player), 200
 
+def create_player():
+    data = request.get_json()
+    player = Player.regisatration_player(data)
+
+    return jsonify(player), 200
