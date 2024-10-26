@@ -1,4 +1,8 @@
+from services.firestore_service import db
+
 class Match:
+    COLLECTION_NAME = 'matches'
+
     def __init__(self, id, away_team, home_team, score, date):
         self.id = id
         self.away_team = away_team
@@ -16,7 +20,13 @@ class Match:
             score=data.get('score'),
             date=data.get('utcDate')
         )
-    
-    # @classmethod
-    # def get_recent_match(self):
+
+    @classmethod
+    def get_all_matches(cls):
+        results = db.collection(cls.COLLECTION_NAME).stream()
+        matches = [Match.from_firestore(doc) for doc in results]
+        
+        matches_list = [match.__dict__ for match in matches]
+
+        return matches_list
         

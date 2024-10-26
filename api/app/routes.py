@@ -11,6 +11,12 @@ def register_routes(app):
         players_controller.get_players,
         methods=['GET']
     )
+    app.add_url_rule(
+        f"{API_V1_PATH}/player",
+        'get_player', 
+        players_controller.get_player,
+        methods=['GET']
+    )
 
     # match
     app.add_url_rule(
