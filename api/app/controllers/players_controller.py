@@ -3,11 +3,7 @@ from models.player import Player
 
 def get_players():
     players = Player.get_all_players()
-    players_dict = {
-        'players': players
-    }
-
-    return jsonify(players_dict), 200
+    return jsonify({'players': players}), 200
 
 def get_player():
     name = request.args.get('name')
@@ -21,6 +17,10 @@ def get_player():
 
 def create_player():
     data = request.get_json()
+
+    if Player.is_incomplete_or_invalid(data):
+        return jsonify({"error": "request data is incomplete or invalid."}), 400
+
     player = Player.regisatration_player(data)
 
     return jsonify(player), 200

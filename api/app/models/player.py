@@ -22,7 +22,6 @@ class Player:
 
     @classmethod
     def from_firestore(cls, doc):
-        """FirestoreのドキュメントからPlayerオブジェクトを生成"""
         data = doc.to_dict()
         return cls(
             id=doc.id,
@@ -31,6 +30,18 @@ class Player:
             nationality=data.get('nationality'),
             position=data.get('position')
         )
+    
+    @classmethod
+    def is_incomplete_or_invalid(cls, request_data):
+        required = {
+            'id',
+            'name',
+            'dateOfBirth',
+            'nationality',
+            'position'
+        }
+
+        return not (required == set(request_data.keys()))
     
     @classmethod
     def get_all_players(cls):
